@@ -1,0 +1,30 @@
+{
+    "debugMode" : 1,
+    "showFPS" : true,
+    "frameRate" : 60,
+    "id" : "gameCanvas",
+    "renderMode" : 1,
+    "engineDir":"../../frameworks/cocos2d-html5",
+
+    "modules" : ["cocos2d", "external"],
+
+    "jsList" : [
+        "src/resource.js",
+        "src/FightScene.js",
+        "src/HeroSprite.js",
+        "src/FightBtnSprite.js",
+        "src/CircleSprite.js",
+        "src/AttachCircle.js",
+        "src/AnimationSprite.js",
+        "src/CreateHeroButton.js",
+        "src/loginScene.js",
+        "src/CreateHeroScene.js",
+        "src/createHeroButton/Answer1.js",
+        "src/createHeroButton/ChooseHero.js",
+        "src/chooseHeroToPlay/HeroImage.js",
+        "src/Culture/CultureScene.js",
+        "src/Culture/AttributeSprite.js",
+        "src/Culture/FunctionButton.js",
+        "src/Culture/TalkSprite.js"
+    ]
+}

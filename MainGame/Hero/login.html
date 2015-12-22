@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="node_modules/socket.io-client/dist/socket.io.js"></script>
+    <style>
+        html{
+            background-color: black;
+            font-family: "隶书";
+            font-size:20px;
+        }
+        body{
+            background-image: url('res/loginbg.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+        }
+        form{
+            margin-left: auto;
+            margin-right:auto;
+            text-align: center;
+            margin-top:100px;
+        }
+    </style>
+    <script>
+        var socket;
+        window.onload = function () {
+            socket = io.connect('http://mmhero.picp.net:3000');
+            socket.on('islLoginSuccess', function (data) {
+                if (data.message == 'success') {
+                    sessionStorage.setItem("currentHero",data.hero.name);
+                    sessionStorage.setItem("hasHero",data.hero.hasHero);
+                    window.location = "index.html";
+                } else {
+                    document.getElementById('error').innerText = "登陆失败，请检查用户名和密码！";
+                }
+            });
+        }
+
+        function doLogin() {
+            socket.emit('login', { username: document.getElementById('username').value, password: document.getElementById('password').value});
+        }
+
+    </script>
+</head>
+<body>
+
+<form>
+    <img src="res/logo.jpg"/><br><br>
+    侠客大名:<input type="text" id="username" name="username"/><br><br>
+    通关文牒:<input type="password" id="password" name="password"/><br><br>
+    <input type="button" value="登陆" onclick="doLogin()"/><br>
+
+    <p style="color:red" id="error"></p>
+    <p>什么？还没有属于自己的侠客？<a href="regist.html">注册</a>一个闯荡江湖吧！</p>
+</form>
+</body>
+</html>

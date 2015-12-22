@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <script src="node_modules/socket.io-client/dist/socket.io.js"></script>
+    <style>
+        html{
+            background-color: black;
+            font-family: "隶书";
+            font-size:20px;
+        }
+        body{
+            background-image: url('res/loginbg.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+        }
+        form{
+            margin-left: auto;
+            margin-right:auto;
+            text-align: center;
+            margin-top:100px;
+        }
+    </style>
+    <script>
+        var socket;
+        window.onload = function () {
+            socket = io.connect('http://mmhero.picp.net:3000');
+
+            socket.on('isRegistSuccess', function (data) {
+                if (data.message == 'success') {
+                    window.location = "login.html";
+                } else {
+                    document.getElementById('error').innerText = data.message;
+                }
+            });
+        }
+
+        function doRegist() {
+            socket.emit('regist', { username: document.getElementById('username').value, password: document.getElementById('password').value});
+        }
+
+    </script>
+</head>
+<body>
+    <form>
+        侠客姓名：<input type="text" id="username" name="username"/><br/><br/>
+        通关文牒：<input type="password" id="password" name="password"/><br><br>
+        <input type="button" onclick="doRegist()" value="注册"/><br><br>
+        <p style="color:red" id="error"></p>
+    </form>
+</body>
+</html>
